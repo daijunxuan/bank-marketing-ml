@@ -46,7 +46,6 @@ where:
 
 ```text
 bank-marketing-ml/
-├── data/
 ├── src/
 │   ├── preprocessing.py
 │   ├── models.py
