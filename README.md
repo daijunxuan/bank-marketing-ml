@@ -47,14 +47,16 @@ where:
 ```text
 bank-marketing-ml/
 ├── data/
-├── notebooks/
 ├── src/
 │   ├── preprocessing.py
 │   ├── models.py
 │   ├── evaluate.py
 │   └── train.py
-├── models/
-└── README.md
+├── 01_exploration.ipynb
+├── 02_model_comparison.ipynb
+├── requirements.txt
+├── README.md
+└── .gitignore
 ```
 
 
