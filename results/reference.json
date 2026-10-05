@@ -1,0 +1,51 @@
+{
+  "data_file": "bank-additional-full.csv",
+  "data_sha256": "74adfc578bf77a7ff4bb1ba4a9f8709d9e3c6907342959c2c8416847e0afb4d8",
+  "split": {
+    "train": 28831,
+    "validation": 6178,
+    "test": 6179,
+    "random_state": 42,
+    "stratified": true
+  },
+  "excluded_features": [
+    "duration"
+  ],
+  "selection_metric": "validation average precision (labelled PR-AUC for compatibility)",
+  "threshold_selection": "maximum validation F1 for each candidate",
+  "validation": {
+    "Logistic Regression": {
+      "ROC-AUC": 0.8021599948839883,
+      "PR-AUC": 0.4700697725957582,
+      "Precision": 0.46365914786967416,
+      "Recall": 0.5316091954022989,
+      "F1": 0.49531459170013387,
+      "threshold": 0.2207722911559955
+    },
+    "Random Forest": {
+      "ROC-AUC": 0.7828242482188311,
+      "PR-AUC": 0.4406762080472387,
+      "Precision": 0.44143033292231815,
+      "Recall": 0.514367816091954,
+      "F1": 0.4751161247511613,
+      "threshold": 0.28
+    }
+  },
+  "selected_model": "Logistic Regression",
+  "threshold": 0.2207722911559955,
+  "test": {
+    "ROC-AUC": 0.8047433970412204,
+    "PR-AUC": 0.4680965312888953,
+    "Precision": 0.46706586826347307,
+    "Recall": 0.5603448275862069,
+    "F1": 0.5094709340300457
+  },
+  "test_positive_rate": 0.11263958569347791,
+  "packages": {
+    "pandas": "2.2.3",
+    "numpy": "2.2.4",
+    "scikit-learn": "1.6.1",
+    "scipy": "1.15.2",
+    "joblib": "1.4.2"
+  }
+}

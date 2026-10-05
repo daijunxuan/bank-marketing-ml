@@ -1,77 +1,20 @@
 from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import (
-    StandardScaler,
-    OneHotEncoder
-)
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
 def get_feature_types(X):
-
-    numeric_features = X.select_dtypes(
-        include=[
-            "int64",
-            "float64"
-        ]
-    ).columns.tolist()
+    numeric = X.select_dtypes(include="number").columns.tolist()
+    categorical = X.select_dtypes(include=["object", "string", "category", "bool"]).columns.tolist()
+    if set(numeric + categorical) != set(X.columns):
+        raise ValueError("Unsupported feature dtype; use numeric or categorical columns")
+    return numeric, categorical
 
 
-    categorical_features = X.select_dtypes(
-        include="object"
-    ).columns.tolist()
-
-
-    return numeric_features, categorical_features
-
-
-
-def build_preprocessor(
-    X,
-    model_type="logistic"
-):
-
-    numeric_features, categorical_features = get_feature_types(X)
-
-
-    if model_type == "logistic":
-
-        preprocessor = ColumnTransformer(
-            transformers=[
-
-                (
-                    "num",
-                    StandardScaler(),
-                    numeric_features
-                ),
-
-                (
-                    "cat",
-                    OneHotEncoder(
-                        handle_unknown="ignore"
-                    ),
-                    categorical_features
-                )
-
-            ]
-        )
-
-
-    elif model_type == "tree":
-
-        preprocessor = ColumnTransformer(
-            transformers=[
-
-                (
-                    "cat",
-                    OneHotEncoder(
-                        handle_unknown="ignore"
-                    ),
-                    categorical_features
-                )
-
-            ],
-
-            remainder="passthrough"
-        )
-
-
-    return preprocessor
+def build_preprocessor(X, model_type="logistic"):
+    numeric, categorical = get_feature_types(X)
+    if model_type not in {"logistic", "tree"}:
+        raise ValueError(f"Unknown model type: {model_type}")
+    return ColumnTransformer([
+        ("num", StandardScaler() if model_type == "logistic" else "passthrough", numeric),
+        ("cat", OneHotEncoder(handle_unknown="ignore"), categorical),
+    ])

@@ -1,5 +1,10 @@
-pandas
-numpy
-scikit-learn
-matplotlib
-jupyter
+pandas==2.2.3
+numpy==2.2.4
+scipy==1.15.2
+scikit-learn==1.6.1
+joblib==1.4.2
+matplotlib==3.10.1
+jupyter==1.1.1
+nbformat==5.10.4
+nbclient==0.10.2
+ipykernel==6.29.5

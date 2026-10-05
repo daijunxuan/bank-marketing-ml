@@ -41,21 +41,24 @@ def evaluate_model(
         "Precision":
         precision_score(
             y_true,
-            pred
+            pred,
+            zero_division=0
         ),
 
 
         "Recall":
         recall_score(
             y_true,
-            pred
+            pred,
+            zero_division=0
         ),
 
 
         "F1":
         f1_score(
             y_true,
-            pred
+            pred,
+            zero_division=0
         )
 
     }
